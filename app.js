@@ -1,3 +1,5 @@
+const CONTACT_EMAIL = "contact@clovergls.com";
+
 const header = document.querySelector("[data-header]");
 const trackingForm = document.querySelector("[data-tracking-form]");
 const trackingResult = document.querySelector("[data-tracking-result]");
@@ -9,13 +11,34 @@ function syncHeader() {
   header.classList.toggle("is-scrolled", window.scrollY > 24);
 }
 
+function valueFrom(formData, key) {
+  return String(formData.get(key) || "").trim();
+}
+
+function buildInquiryMailto(data) {
+  const subject = `[CLOVER GLS 문의] ${data.company}`;
+  const body = [
+    "CLOVER GLS 홈페이지 문의입니다.",
+    "",
+    `회사명: ${data.company}`,
+    `담당자: ${data.name}`,
+    `연락처: ${data.phone || "-"}`,
+    `이메일: ${data.email || "-"}`,
+    "",
+    "문의 내용:",
+    data.message || "-"
+  ].join("\n");
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 window.addEventListener("scroll", syncHeader, { passive: true });
 syncHeader();
 
 trackingForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(trackingForm);
-  const trackingNo = String(formData.get("trackingNo") || "").trim();
+  const trackingNo = valueFrom(formData, "trackingNo");
 
   trackingResult.className = "tracking-result";
   if (!trackingNo) {
@@ -31,16 +54,25 @@ trackingForm?.addEventListener("submit", (event) => {
 quoteForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(quoteForm);
-  const company = String(formData.get("company") || "").trim();
-  const name = String(formData.get("name") || "").trim();
+  const inquiry = {
+    company: valueFrom(formData, "company"),
+    name: valueFrom(formData, "name"),
+    phone: valueFrom(formData, "phone"),
+    email: valueFrom(formData, "email"),
+    message: valueFrom(formData, "message")
+  };
 
   quoteResult.className = "form-note";
-  if (!company || !name) {
+  if (!inquiry.company || !inquiry.name) {
     quoteResult.textContent = "회사명과 담당자명을 입력해 주세요.";
+    return;
+  }
+  if (!inquiry.phone && !inquiry.email) {
+    quoteResult.textContent = "연락처 또는 이메일 중 하나는 입력해 주세요.";
     return;
   }
 
   quoteResult.classList.add("success");
-  quoteResult.textContent = "문의 접수 화면 예시입니다. 서버 연결 후 관리자에게 전달되도록 만들 수 있습니다.";
-  quoteForm.reset();
+  quoteResult.textContent = "메일 작성창이 열리면 내용을 확인한 뒤 보내기를 눌러 주세요.";
+  window.location.href = buildInquiryMailto(inquiry);
 });
