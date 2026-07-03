@@ -1271,3 +1271,110 @@ select {
     gap: 4px;
   }
 }
+
+/* Final layout guard: keeps newly added sections centered even after cached CSS updates. */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  overflow: hidden;
+}
+
+.services-section,
+.network-section,
+.news-section,
+.contact-section {
+  width: 100%;
+  max-width: 100%;
+}
+
+.service-grid.premium,
+.benefit-grid,
+.network-metrics,
+.country-grid,
+.about-layout,
+.timeline,
+.tracking-section,
+.news-section .section-heading,
+.news-grid,
+.contact-card {
+  width: min(1120px, calc(100% - 40px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.network-section {
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(33, 182, 90, 0.12), transparent 32%),
+    linear-gradient(135deg, #031120, #06213a 68%, #031120);
+}
+
+.network-section .section-heading,
+.network-section .section-heading p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.network-section .section-heading h2 {
+  color: #ffffff;
+}
+
+.network-metrics,
+.country-grid {
+  text-align: left;
+}
+
+.news-section .section-heading {
+  text-align: left;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.86fr) minmax(0, 1.14fr);
+  overflow: hidden;
+}
+
+.contact-panel {
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(33, 182, 90, 0.22), transparent 34%),
+    linear-gradient(145deg, #043246, #061120 76%);
+}
+
+.contact-panel dd,
+.contact-panel a {
+  color: #ffffff;
+}
+
+@media (max-width: 1080px) {
+  .news-grid,
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .service-grid.premium,
+  .benefit-grid,
+  .network-metrics,
+  .country-grid,
+  .about-layout,
+  .timeline,
+  .tracking-section,
+  .news-section .section-heading,
+  .news-grid,
+  .contact-card {
+    width: 100%;
+  }
+}
