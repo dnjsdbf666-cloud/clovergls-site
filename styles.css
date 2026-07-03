@@ -286,6 +286,25 @@ textarea {
   font-size: 18px;
 }
 
+.contact-direct {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.contact-direct a {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 40px;
+  align-items: center;
+  border: 1px solid rgba(13, 75, 50, 0.16);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: var(--forest);
+  background: rgba(255, 255, 255, 0.72);
+  font-weight: 800;
+}
+
 .tracking-box,
 .quote-form {
   border: 1px solid var(--line);
@@ -348,6 +367,27 @@ textarea {
 .form-note.success {
   color: var(--forest);
   font-weight: 800;
+}
+
+.form-actions-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.form-actions-inline a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(13, 75, 50, 0.18);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: var(--forest);
+  background: #eef9f2;
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .tracking-result.warning {
