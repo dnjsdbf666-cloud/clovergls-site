@@ -764,6 +764,37 @@ textarea {
   font-weight: 800;
 }
 
+.thanks-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    linear-gradient(135deg, rgba(6, 16, 33, 0.86), rgba(6, 16, 33, 0.58)),
+    url("https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=1800&q=85") center / cover;
+}
+
+.thanks-card {
+  width: min(560px, 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+  padding: clamp(28px, 5vw, 48px);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.thanks-card h1 {
+  margin: 14px 0 0;
+  font-size: clamp(34px, 7vw, 52px);
+  line-height: 1.08;
+}
+
+.thanks-card p:not(.pill-title) {
+  margin: 18px 0 28px;
+  color: var(--muted);
+  word-break: keep-all;
+}
+
 @media (max-width: 1080px) {
   .service-grid.premium,
   .benefit-grid,
